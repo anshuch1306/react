@@ -35,6 +35,23 @@ describe('Avatar', () => {
     const avatar = screen.getByTestId('avatar')
     expect(avatar).toHaveAttribute('src', 'primer.png')
   })
+  
+  it('renders placeholder text when no src is provided', () => {
+    render(<Avatar placeholder="JD" data-testid="avatar" />)
+    expect(screen.getByTestId('avatar')).toHaveTextContent('JD')
+  })
+
+  it('renders the image when both src and placeholder are provided', () => {
+    render(<Avatar src="primer.png" placeholder="JD" data-testid="avatar" />)
+    expect(screen.getByTestId('avatar')).toHaveAttribute('src', 'primer.png')
+    expect(screen.getByTestId('avatar')).not.toHaveTextContent('JD')
+  })
+
+  it('renders placeholder with square shape when square is true', () => {
+    render(<Avatar placeholder="JD" square data-testid="avatar" />)
+    expect(screen.getByTestId('avatar')).toHaveAttribute('data-square', '')
+  })
+
 
   it('should support the `style` prop without overriding internal styles', () => {
     render(
